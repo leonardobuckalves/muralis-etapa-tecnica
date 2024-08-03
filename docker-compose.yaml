@@ -1,5 +1,5 @@
 services:
-  db:
+  gerenciadordespesas:
     image: mariadb
     restart: always
     ports:

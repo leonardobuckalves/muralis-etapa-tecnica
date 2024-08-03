@@ -2,7 +2,7 @@
   "name": "desafio-nodejs",
   "version": "1.0.0",
   "description": "Desafio NodeJS etapa técnica do programa Estágio Alem do Sistema na Muralis Tecnologia.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -25,6 +25,7 @@
     "nodemon": "^3.1.4"
   },
   "dependencies": {
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "mysql2": "^3.11.0"
   }
