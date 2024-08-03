@@ -1,0 +1,31 @@
+{
+  "name": "desafio-nodejs",
+  "version": "1.0.0",
+  "description": "Desafio NodeJS etapa técnica do programa Estágio Alem do Sistema na Muralis Tecnologia.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leonardobuckalves/muralis-etapa-tecnica.git"
+  },
+  "keywords": [
+    "NodeJS",
+    "Estágio",
+    "Muralis"
+  ],
+  "author": "Leonardo Buck Alves",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leonardobuckalves/muralis-etapa-tecnica/issues"
+  },
+  "homepage": "https://github.com/leonardobuckalves/muralis-etapa-tecnica#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "mysql2": "^3.11.0"
+  }
+}
