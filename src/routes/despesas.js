@@ -12,9 +12,6 @@ router.get('/', (req, res) => {
     const formatadoPrimeiroDiaMes= primeiroDiaMes.toISOString().replace('T', ' ');
     const formatadoUltimoDiaMes = ultimoDiaMes.toISOString().replace('T', ' ');
 
-    console.log(formatadoPrimeiroDiaMes)
-    console.log(formatadoUltimoDiaMes)
-
     mysql.getConnection((error, connection) => {
         if (error) { return res.status(500).send({ data: error, success: false }) }
         connection.query(
