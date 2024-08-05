@@ -15,6 +15,19 @@ router.get('/', (req, res) => {
                         success: false
                     });
                 }
+
+                if (resultado.length === 0) {
+                    return res.status(200).send({
+                        data: null,
+                        success: true
+                    });
+                }
+
+                const dadosFormatados = resultado.map(row => {
+                    row.data_compra = format(row.data_compra, 'dd-MM-yyyy HH:mm:ss');
+                    return row;
+                });
+
                 return res.status(200).send({
                     data: resultado,
                     success: true
@@ -25,7 +38,15 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+
     const dataFormatada = format(req.body.data_compra, 'yyyy-MM-dd HH:mm:ss');
+
+    if (!req.body.valor || !req.body.data_compra || !req.body.descricao || !req.body.categorias_id || !req.body.tipos_pagamento_id) {
+        return res.status(400).send({
+            data: 'Todos os campos são obrigatórios',
+            success: false
+        });
+    }
 
     mysql.getConnection((error, connection) => {
         if (error) { return res.status(500).send({ data: error, success: false }) }
