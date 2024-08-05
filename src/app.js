@@ -1,9 +1,12 @@
+require('dotenv').config();
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 const rotaDespesas = require('./routes/despesas');
 const dbInitializer = require('../scripts/dbInitializer');
 
-require('dotenv').config();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 dbInitializer();
 

@@ -29,7 +29,7 @@ router.get('/', (req, res) => {
                 });
 
                 return res.status(200).send({
-                    data: resultado,
+                    data: dadosFormatados,
                     success: true
                 });
             }
@@ -39,14 +39,14 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
 
-    const dataFormatada = format(req.body.data_compra, 'yyyy-MM-dd HH:mm:ss');
-
     if (!req.body.valor || !req.body.data_compra || !req.body.descricao || !req.body.categorias_id || !req.body.tipos_pagamento_id) {
         return res.status(400).send({
             data: 'Todos os campos são obrigatórios',
             success: false
         });
     }
+
+    const dataFormatada = format(req.body.data_compra, 'yyyy-MM-dd HH:mm:ss');
 
     mysql.getConnection((error, connection) => {
         if (error) { return res.status(500).send({ data: error, success: false }) }
