@@ -1,14 +1,24 @@
 const express = require('express');
 const mysql = require('../config/db').pool;
 const router = express.Router();
-const { format } = require('date-fns');
+const { format, parse } = require('date-fns');
 const { body, validationResult } = require('express-validator');
 
 router.get('/', (req, res) => {
+    const date = new Date();
+    const primeiroDiaMes = new Date(date.getFullYear(), date.getMonth(), 1);
+    const ultimoDiaMes = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+
+    const formatadoPrimeiroDiaMes= primeiroDiaMes.toISOString().replace('T', ' ');
+    const formatadoUltimoDiaMes = ultimoDiaMes.toISOString().replace('T', ' ');
+
+    console.log(formatadoPrimeiroDiaMes)
+    console.log(formatadoUltimoDiaMes)
+
     mysql.getConnection((error, connection) => {
         if (error) { return res.status(500).send({ data: error, success: false }) }
         connection.query(
-            `SELECT * FROM despesas;`,
+            `SELECT * FROM despesas WHERE data_compra >= '${formatadoPrimeiroDiaMes}' AND data_compra <= '${formatadoUltimoDiaMes}';`,
             (error, resultado) => {
                 if (error) {
                     return res.status(400).send({
@@ -64,7 +74,9 @@ router.post(
             });
         }
 
-        const dataFormatada = format(req.body.data_compra, 'yyyy-MM-dd HH:mm:ss');
+        const dataParsed = parse(req.body.data_compra, 'dd-MM-yyyy HH:mm:ss', new Date());
+
+        const dataFormatada = format(dataParsed, 'yyyy-MM-dd HH:mm:ss');
 
         mysql.getConnection((error, connection) => {
             if (error) { return res.status(500).send({ data: error, success: false }) }
